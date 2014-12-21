@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="lib/jquery.ui.1.11.2/jquery-ui-1.11.2/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jPage.css">
+      <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>jQuery UI Customisable Page Example</title>
+  </head>
+  <body>
+    <div class="page">
+
+      <h1>Customisable Home Page Example</h1>
+      <p>Move the boxes around or close them completely. Your choices will be saved and the page will appear as it was when you left it.<p>
+	  <a id="restore" href="#" title="Restore Deleted Boxes">Restore Deleted Boxes</a>
+
+
+        <button data-bind="click: add">Add Widget</button>
+        <div class="container-fluid">
+            <div class="row" id="sortGrid"  data-bind="dragger: {}">
+                <div class="col-md-4 col" id="col1" data-bind="foreach: widgets">
+
+                    <div class="panel panel-default box ui-widget ui-corner-all">
+                        <div class="panel-heading title ui-widget-header ui-corner-top"><span data-bind="text: title"></span></div>
+                        <div class="panel-body ui-widget-content">
+                            <span data-bind="text: content"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4 col" id="col2"></div>
+                <div class="col-md-4 col" id="col3"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.ui.1.11.2/jquery-ui-1.11.2/jquery-ui.js"></script>
+    <script type="text/javascript" src="bower_components/knockout/dist/knockout.debug.js"></script>
+    <script type="text/javascript" src="scripts/jpageVM.js"></script>
+
+
+    <script type="text/javascript">
+      //function to execute when doc ready
+      $(function() {
+
+      });
+    </script>
+  </body>
+</html>

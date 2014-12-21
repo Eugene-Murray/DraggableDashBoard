@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="lib/jquery.ui.1.11.2/jquery-ui-1.11.2/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jPage.css">
+      <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>jQuery UI Customisable Page Example</title>
+  </head>
+  <body>
+    <div class="page">
+
+      <h1>Customisable Home Page Example</h1>
+      <p>Move the boxes around or close them completely. Your choices will be saved and the page will appear as it was when you left it.<p>
+	  <a id="restore" href="#" title="Restore Deleted Boxes">Restore Deleted Boxes</a>
+      <!--<div id="sortGrid" class="ui-helper-clearfix">-->
+        <!--<div id="col1" class="col "></div>-->
+        <!--<div id="col2" class="col"></div>-->
+        <!--<div id="col3" class="col"></div>-->
+        <!--<div id="hidden"></div>-->
+      <!--</div>-->
+
+<br />
+        <br />
+
+        <div class="container-fluid">
+            <div class="row" id="sortGrid">
+                <div class="col-md-4 col" id="col1"></div>
+                <div class="col-md-4 col" id="col2"></div>
+                <div class="col-md-4 col" id="col3"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.ui.1.11.2/jquery-ui-1.11.2/jquery-ui.js"></script>
+
+	<script type="text/javascript" src="lib/jquery.cookie.js"></script>
+    <script type="text/javascript">
+      //function to execute when doc ready
+      $(function() {
+
+
+
+
+
+
+
+		var processData = {
+
+            jquery1: { title: "Latest Stories on Learning jQuery", defaultCol: 1, parser: $.getJSON("http://pipes.yahoo.com/danwellman/learningjquery?_render=JSON&_callback=?", function(data) {
+                $.each(data.value.items, function(i, item) {
+                    $("<a />").attr({"id": "articleLink", "href": item.link}).text(item.title).appendTo("#jqueryContent");
+                    $("<p>").text(item.description.split("<")[0]).appendTo("#jqueryContent");
+                    return (i > 3) ? false : null;
+                });
+            })},
+            jquery2: { title: "Latest Stories on Learning jQuery", defaultCol: 1, parser: $.getJSON("http://pipes.yahoo.com/danwellman/learningjquery?_render=JSON&_callback=?", function(data) {
+                $.each(data.value.items, function(i, item) {
+                    $("<a />").attr({"id": "articleLink", "href": item.link}).text(item.title).appendTo("#jqueryContent");
+                    $("<p>").text(item.description.split("<")[0]).appendTo("#jqueryContent");
+                    return (i > 3) ? false : null;
+                });
+            })},
+            jquery3: { title: "Latest Stories on Learning jQuery", defaultCol: 2, parser: $.getJSON("http://pipes.yahoo.com/danwellman/learningjquery?_render=JSON&_callback=?", function(data) {
+                $.each(data.value.items, function(i, item) {
+                    $("<a />").attr({"id": "articleLink", "href": item.link}).text(item.title).appendTo("#jqueryContent");
+                    $("<p>").text(item.description.split("<")[0]).appendTo("#jqueryContent");
+                    return (i > 3) ? false : null;
+                });
+            })},
+            jquery4: { title: "Latest Stories on Learning jQuery", defaultCol: 2, parser: $.getJSON("http://pipes.yahoo.com/danwellman/learningjquery?_render=JSON&_callback=?", function(data) {
+                $.each(data.value.items, function(i, item) {
+                    $("<a />").attr({"id": "articleLink", "href": item.link}).text(item.title).appendTo("#jqueryContent");
+                    $("<p>").text(item.description.split("<")[0]).appendTo("#jqueryContent");
+                    return (i > 3) ? false : null;
+                });
+            })},
+            jquery5: { title: "Latest Stories on Learning jQuery", defaultCol: 3, parser: $.getJSON("http://pipes.yahoo.com/danwellman/learningjquery?_render=JSON&_callback=?", function(data) {
+                $.each(data.value.items, function(i, item) {
+                    $("<a />").attr({"id": "articleLink", "href": item.link}).text(item.title).appendTo("#jqueryContent");
+                    $("<p>").text(item.description.split("<")[0]).appendTo("#jqueryContent");
+                    return (i > 3) ? false : null;
+                });
+            })},
+            jquery6: { title: "Latest Stories on Learning jQuery", defaultCol: 3, parser: $.getJSON("http://pipes.yahoo.com/danwellman/learningjquery?_render=JSON&_callback=?", function(data) {
+                $.each(data.value.items, function(i, item) {
+                    $("<a />").attr({"id": "articleLink", "href": item.link}).text(item.title).appendTo("#jqueryContent");
+                    $("<p>").text(item.description.split("<")[0]).appendTo("#jqueryContent");
+                    return (i > 3) ? false : null;
+                });
+            })}
+
+
+
+
+		};
+
+        //check for cookie
+        //if (!$.cookie("columnOrder")) {
+
+
+            console.log('!!!!!!!!!!!!!!!!XXXXXXXXXXXXXX');
+            console.log(processData);
+		
+          $.each(processData, function(i, item) {
+			$("<div>").addClass("box ui-widget ui-corner-all").attr("id", "col" + processData[i].defaultCol + "_" + i).appendTo("#col" + processData[i].defaultCol);
+			$("<div>").addClass("title ui-widget-header ui-corner-top").attr("id", i + "Title").text(processData[i].title).appendTo("#col" + processData[i].defaultCol + "_" + i);
+			$("<div>").addClass("close ui-icon ui-icon-close").attr("title", "Close").appendTo("#" + i + "Title");
+			$("<div>").addClass("ui-widget-content").attr("id", i + "Content").appendTo("#col" + processData[i].defaultCol + "_" + i);
+		  });
+
+//          $("#hidden").empty();
+//        } else {
+//
+//          //split serialized string from cookie
+//          var cols = $.cookie("columnOrder").split("&");
+//
+//          $.each(cols, function(i, item) {
+//            if(item != "") {
+//
+//                console.log('!!!!!!!!!!!!!!!!');
+//                console.log(item);
+//
+//			  //split the data sting
+//              var col = item.split("=")[0],
+//                box = item.split("=")[1];
+//
+//              //build current box
+//              $("<div>").addClass("box ui-widget ui-corner-all").attr("id", col + "_" + box).appendTo("#" + col);
+//              $("<div>").addClass("title ui-widget-header ui-corner-top").attr("id", box + "Title").text(processData[box].title).appendTo("#" + col + "_" + box);
+//              $("<div>").addClass("close ui-icon ui-icon-close").attr("title", "Close").appendTo("#" + box + "Title");
+//			  $("<div>").addClass("ui-widget-content").attr("id", box + "Content").appendTo("#" + col + "_" + box);
+//            }
+//          });
+//        }
+
+		//write cookie to store state
+//		function cookieWriter() {
+//
+//		  //serialze columns to get latest order
+//          var colOrders = $("#col1").sortable("serialize",
+//         {key:"col1"}) + "&" + $("#col2").sortable("serialize",
+//         {key:"col2"}) + "&" + $("#col3").sortable("serialize",
+//         {key:"col3"}) + "&" + $("#hidden").sortable("serialize",
+//         {key:"hidden"});
+//
+//		  //write column order to cookie
+//          $.cookie("columnOrder", colOrders, { path:"/", expires:365 });
+//		}
+
+         //define config object
+         var sortOpts = {
+           handle: ".title",
+           containment: "#sortGrid",
+           dropOnEmpty: true,
+           connectWith: ["#col1", "#col2", "#col3"] //,
+           //stop: cookieWriter
+         };
+
+         //make columns sortable
+         $("#col1, #col2, #col3").sortable(sortOpts);
+         //$("#hidden").sortable();
+
+//         //add closed item to hidden col and write new cookie
+//         $(".close", "#sortGrid").click(function() {
+//           $(this).parent().parent().appendTo("#hidden");
+//
+//		   cookieWriter();
+//         });
+//
+//         //restore closed boxes
+//         $("#restore").click(function() {
+//
+//           $("#hidden").children().each(function() {
+//
+//             var col = "",
+//			   box = $(this);
+//
+//             //look for col with space
+//             $(".col", "#sortGrid").each(function() {
+//               ($(this).children().length < 2) ? col = $(this).attr("id") : null ;
+//             });
+//
+//             //get id and split to get box name
+//             var boxId = box.attr("id").split("_")[1];
+//
+//             //add box to col
+//             box.attr("id", col + "_" + boxId).appendTo("#" + col);
+//
+//			 cookieWriter();
+//          });
+//        });
+      });
+    </script>
+  </body>
+</html>
